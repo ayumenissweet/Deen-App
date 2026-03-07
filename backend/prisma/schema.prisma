@@ -1,0 +1,176 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+//////////////////////////
+// ENUMS
+//////////////////////////
+
+enum AuthProvider {
+  LOCAL
+  GOOGLE
+}
+
+enum PrayerName {
+  FAJR
+  DHUHR
+  ASR
+  MAGHRIB
+  ISHA
+}
+
+//////////////////////////
+// USER
+//////////////////////////
+
+model User {
+  id            Int           @id @default(autoincrement())
+  name          String?
+  email         String        @unique
+  password      String?       // null if Google user
+  provider      AuthProvider  @default(LOCAL)
+  providerId    String?       // Google ID
+  createdAt     DateTime      @default(now())
+  updatedAt     DateTime      @updatedAt
+
+  refreshToken  String?       // hashed
+
+  // Relations
+  prayerCompletions PrayerCompletion[]
+  quranProgress     QuranProgress?
+  adkarProgress     AdkarProgress[]
+  quizAttempts      QuizAttempt[]
+  stats             UserStats?
+  favorites         FavoriteHadith[]
+  dailyProgress     DailyProgress[]
+
+  @@index([providerId])
+}
+
+//////////////////////////
+// PRAYER TRACKING
+//////////////////////////
+
+model PrayerCompletion {
+  id        Int        @id @default(autoincrement())
+  prayer    PrayerName
+  date      DateTime
+  completed Boolean    @default(true)
+
+  userId    Int
+  user      User       @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, prayer, date])
+}
+
+//////////////////////////
+// QURAN PROGRESS
+//////////////////////////
+
+model QuranProgress {
+  id         Int      @id @default(autoincrement())
+  lastSurah  Int
+  lastAyah   Int
+  percentage Float    @default(0)
+
+  userId     Int      @unique
+  user       User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+//////////////////////////
+// ADKAR PROGRESS
+//////////////////////////
+
+model AdkarProgress {
+  id        Int      @id @default(autoincrement())
+  category  String
+  completed Boolean  @default(true)
+  date      DateTime @default(now())
+
+  userId    Int
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId, date])
+}
+
+//////////////////////////
+// QUIZ SYSTEM
+//////////////////////////
+
+model Question {
+  id            Int     @id @default(autoincrement())
+  question      String
+  optionA       String
+  optionB       String
+  optionC       String
+  optionD       String
+  correctAnswer String
+  createdAt     DateTime @default(now())
+
+  quizAttempts  QuizAttempt[]
+}
+
+model QuizAttempt {
+  id        Int      @id @default(autoincrement())
+  score     Int
+  total     Int
+  createdAt DateTime @default(now())
+
+  userId    Int
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  questionId Int?
+  question   Question? @relation(fields: [questionId], references: [id])
+
+  @@index([userId])
+}
+
+//////////////////////////
+// GAMIFICATION
+//////////////////////////
+
+model UserStats {
+  id        Int    @id @default(autoincrement())
+  xp        Int    @default(0)
+  level     Int    @default(1)
+  streak    Int    @default(0)
+
+  userId    Int    @unique
+  user      User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+//////////////////////////
+// FAVORITES
+//////////////////////////
+
+model FavoriteHadith {
+  id        Int      @id @default(autoincrement())
+  hadithId  String
+  source    String
+  createdAt DateTime @default(now())
+
+  userId    Int
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, hadithId])
+}
+
+//////////////////////////
+// DAILY PROGRESS
+//////////////////////////
+
+model DailyProgress {
+  id          Int      @id @default(autoincrement())
+  date        DateTime
+  completion  Float    @default(0)
+
+  userId      Int
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, date])
+}
