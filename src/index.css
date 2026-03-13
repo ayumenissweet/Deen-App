@@ -6,56 +6,56 @@
    ============================================================ */
 
 /* --- Google Fonts --- */
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Amiri:wght@400;700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Amiri:wght@400;700&display=swap");
 
 /* ---- Design Tokens (CSS Custom Properties) ---- */
 :root {
   /* Background & Surfaces */
-  --bg-main:        #041C32;
-  --bg-card-start:  #00172D;
-  --bg-card-end:    #2A4794;
-  --bg-darker:      #000F1F;
-  --bg-surface:     #0b2c44;
+  --bg-main: #041c32;
+  --bg-card-start: #00172d;
+  --bg-card-end: #2a4794;
+  --bg-darker: #000f1f;
+  --bg-surface: #0b2c44;
 
   /* Strokes & Borders */
-  --card-stroke:    rgba(5, 104, 149, 0.6);
+  --card-stroke: rgba(5, 104, 149, 0.6);
 
   /* Accent & Brand */
-  --accent:         #F2B84B;          /* Gold */
-  --accent-hover:   #f6c90e;
-  --success:        #4CAF50;          /* Green */
-  --danger:         #ef4444;          /* Red for errors */
-  --purple-badge:   #A29BFE;
+  --accent: #f2b84b; /* Gold */
+  --accent-hover: #f6c90e;
+  --success: #4caf50; /* Green */
+  --danger: #ef4444; /* Red for errors */
+  --purple-badge: #a29bfe;
 
   /* Typography Colors */
-  --font-main:      #F1F6FF;
-  --font-secondary: #A8CFFF;
-  --font-weak:      #8492A3;
+  --font-main: #f1f6ff;
+  --font-secondary: #a8cfff;
+  --font-weak: #8492a3;
 
   /* Icons */
-  --icons:          #8492A3;
+  --icons: #8492a3;
 
   /* Progress */
-  --progress-bar-bg: #4C6080;
+  --progress-bar-bg: #4c6080;
 
   /* Spacing scale (used for consistency) */
-  --space-xs:  4px;
-  --space-sm:  8px;
-  --space-md:  16px;
-  --space-lg:  24px;
-  --space-xl:  32px;
+  --space-xs: 4px;
+  --space-sm: 8px;
+  --space-md: 16px;
+  --space-lg: 24px;
+  --space-xl: 32px;
   --space-2xl: 48px;
 
   /* Border radius */
-  --radius-sm:  8px;
-  --radius-md:  12px;
-  --radius-lg:  16px;
-  --radius-xl:  20px;
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-xl: 20px;
   --radius-full: 50%;
 
   /* Shadows */
-  --shadow-card:  0 4px 20px rgba(2, 12, 21, 0.6);
-  --shadow-glow:  0 0 15px rgba(242, 184, 75, 0.2);
+  --shadow-card: 0 4px 20px rgba(2, 12, 21, 0.6);
+  --shadow-glow: 0 0 15px rgba(242, 184, 75, 0.2);
 
   /* Transitions */
   --transition-fast: 0.2s ease;
@@ -85,7 +85,11 @@ html {
 }
 
 body {
-  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  font-family:
+    "Inter",
+    system-ui,
+    -apple-system,
+    sans-serif;
   line-height: 1.5;
   font-weight: 400;
   color: var(--font-main);
@@ -98,7 +102,7 @@ body {
 /* Arabic text uses Amiri */
 [dir="rtl"],
 .arabic-text {
-  font-family: 'Amiri', serif;
+  font-family: "Amiri", serif;
 }
 
 /* ---- Root mount ---- */
@@ -129,9 +133,18 @@ button {
 }
 
 /* ---- Headings ---- */
-h1 { font-size: clamp(1.5rem, 4vw, 2.2rem); font-weight: 700; }
-h2 { font-size: clamp(1.2rem, 3vw, 1.8rem); font-weight: 700; }
-h3 { font-size: clamp(1rem, 2.5vw, 1.4rem); font-weight: 600; }
+h1 {
+  font-size: clamp(1.5rem, 4vw, 2.2rem);
+  font-weight: 700;
+}
+h2 {
+  font-size: clamp(1.2rem, 3vw, 1.8rem);
+  font-weight: 700;
+}
+h3 {
+  font-size: clamp(1rem, 2.5vw, 1.4rem);
+  font-weight: 600;
+}
 
 /* ---- Layout: App Container ---- */
 .app-container {
@@ -233,6 +246,10 @@ h3 { font-size: clamp(1rem, 2.5vw, 1.4rem); font-weight: 600; }
     padding-bottom: calc(var(--navbar-height-mobile) + var(--space-md));
   }
 
-  h1 { font-size: 1.5rem; }
-  h2 { font-size: 1.2rem; }
+  h1 {
+    font-size: 1.5rem;
+  }
+  h2 {
+    font-size: 1.2rem;
+  }
 }
