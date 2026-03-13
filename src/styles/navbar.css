@@ -1,0 +1,152 @@
+/* ============================================================
+   NAVBAR.CSS — Responsive Navigation
+   Desktop: Fixed left sidebar (80px)
+   Mobile:  Fixed bottom bar (horizontal)
+   ============================================================ */
+
+/* ---- Desktop Sidebar (default) ---- */
+.navbar {
+  width: var(--navbar-width);
+  height: 100vh;
+  position: fixed;
+  left: 0;
+  top: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-sm);
+  padding: var(--space-lg) var(--space-sm);
+  background: linear-gradient(180deg, #0A2647 0%, #071b36 100%);
+  box-shadow: 2px 0 20px rgba(0, 0, 0, 0.3);
+  z-index: 1000;
+  transition: all var(--transition-base);
+}
+
+/* ---- Nav Item ---- */
+.nav-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 56px;
+  height: 60px;
+  padding: var(--space-sm);
+  border-radius: var(--radius-md);
+  text-decoration: none;
+  color: var(--font-weak);
+  transition: all var(--transition-base);
+  cursor: pointer;
+  position: relative;
+}
+
+/* Hover glow effect */
+.nav-item:hover {
+  background: rgba(242, 184, 75, 0.08);
+  color: var(--accent);
+  transform: translateY(-2px);
+}
+
+/* Active state */
+.nav-item.active {
+  color: var(--accent);
+  background: rgba(242, 184, 75, 0.1);
+}
+
+/* Gold indicator dot for active */
+.nav-item.active::after {
+  content: '';
+  position: absolute;
+  right: -4px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 4px;
+  height: 20px;
+  background: var(--accent);
+  border-radius: 2px;
+  box-shadow: 0 0 8px rgba(242, 184, 75, 0.4);
+}
+
+.nav-item.active p {
+  color: var(--accent);
+}
+
+/* ---- Nav Icon ---- */
+.nav-icon {
+  width: 22px;
+  height: 22px;
+  margin-bottom: 3px;
+  filter: brightness(0.7);
+  transition: filter var(--transition-fast);
+}
+
+.nav-item:hover .nav-icon,
+.nav-item.active .nav-icon {
+  filter: brightness(1) drop-shadow(0 0 4px rgba(242, 184, 75, 0.3));
+}
+
+/* ---- Nav Label ---- */
+.nav-item p {
+  font-size: 10px;
+  font-weight: 500;
+  text-align: center;
+  margin: 0;
+  transition: color var(--transition-fast);
+  white-space: nowrap;
+}
+
+/* ============================================================
+   MOBILE: Bottom Navigation Bar (≤ 768px)
+   ============================================================ */
+@media (max-width: 768px) {
+  .navbar {
+    width: 100%;
+    height: var(--navbar-height-mobile);
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    top: auto;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    padding: var(--space-xs) 0;
+    background: linear-gradient(0deg, #0A2647 0%, rgba(10, 38, 71, 0.97) 100%);
+    box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.4);
+    border-top: 1px solid rgba(5, 104, 149, 0.3);
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+  }
+
+  .nav-item {
+    width: auto;
+    height: auto;
+    min-width: 50px;
+    padding: var(--space-xs) var(--space-sm);
+  }
+
+  .nav-item:hover {
+    transform: none;
+  }
+
+  /* Active indicator: bottom dot instead of side bar */
+  .nav-item.active::after {
+    right: auto;
+    left: 50%;
+    top: auto;
+    bottom: -2px;
+    transform: translateX(-50%);
+    width: 20px;
+    height: 3px;
+    border-radius: 2px;
+  }
+
+  .nav-icon {
+    width: 20px;
+    height: 20px;
+    margin-bottom: 2px;
+  }
+
+  .nav-item p {
+    font-size: 9px;
+  }
+}

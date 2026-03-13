@@ -1,0 +1,186 @@
+/* ============================================================
+   QUIZ.CSS — Islamic Knowledge Quiz Page
+   ============================================================ */
+
+.quiz-container {
+  padding: 0;
+  margin: 0;
+  min-height: 100vh;
+  color: var(--font-main);
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ---- Quiz header icons ---- */
+.quiz-container .quiz-icons {
+  display: flex;
+  justify-content: flex-start;
+  gap: var(--space-sm);
+  padding: var(--space-lg);
+  cursor: pointer;
+}
+
+.quiz-container .quiz-icons img {
+  width: 28px;
+  opacity: 0.8;
+  transition: opacity var(--transition-fast);
+}
+
+.quiz-container .quiz-icons img:hover {
+  opacity: 1;
+}
+
+/* ---- Mosque Banner (within quiz) ---- */
+.skyline-container {
+  width: 100%;
+  height: 374px;
+  position: relative;
+  overflow: hidden;
+}
+
+.mosque-skyline {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 374px;
+
+  background-image: url("../images/Mosque.svg");
+  background-repeat: repeat-x;
+  background-size: 401px 374px;
+
+  z-index: 3;
+}
+
+.wave {
+  position: absolute;
+  width: 100%;
+  background-repeat: repeat-x;
+}
+
+.wave-front {
+  position: absolute;
+  bottom: 80px;
+  width: 100%;
+  height: 100px;
+
+  background-image: url("../images/wave1.svg");
+  background-repeat: repeat-x;
+  background-size: 200px 100px;
+
+  z-index: 2;
+}
+
+.wave-back {
+  position: absolute;
+  bottom: 120px;
+  width: 100%;
+  height: 100px;
+
+  background-image: url("../images/wave2.svg");
+  background-repeat: repeat-x;
+  background-size: 404px 100px;
+
+  z-index: 1;
+}
+
+/* ---- Question Section ---- */
+.quiz-container h2 {
+  padding: var(--space-lg) var(--space-lg) var(--space-md);
+  font-size: clamp(1.1rem, 3vw, 1.6rem);
+  font-weight: 700;
+  color: var(--font-main);
+  text-align: center;
+  line-height: 1.4;
+}
+
+.questions {
+  padding: var(--space-sm) var(--space-lg) var(--space-xl);
+  max-width: 500px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+/* ---- Option Buttons ---- */
+.option {
+  display: block;
+  width: 100%;
+  margin: var(--space-sm) 0;
+  padding: 14px var(--space-lg);
+  background: var(--bg-surface);
+  border: 1.5px solid var(--card-stroke);
+  color: var(--font-main);
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: 500;
+  text-align: left;
+  transition: all var(--transition-base);
+}
+
+.option:hover {
+  background: #123d5a;
+  border-color: var(--accent);
+  transform: translateX(4px);
+}
+
+.option.correct {
+  border-color: var(--success);
+  background: rgba(76, 175, 80, 0.1);
+  box-shadow: 0 0 12px rgba(76, 175, 80, 0.2);
+}
+
+.option.wrong {
+  border-color: var(--danger);
+  background: rgba(239, 68, 68, 0.1);
+  box-shadow: 0 0 12px rgba(239, 68, 68, 0.2);
+  animation: shake 0.4s ease;
+}
+
+@keyframes shake {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  25% {
+    transform: translateX(-6px);
+  }
+  75% {
+    transform: translateX(6px);
+  }
+}
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+@media (max-width: 480px) {
+  .quiz-container .skyline-container {
+    height: 180px;
+  }
+
+  .quiz-container .mosque-skyline {
+    height: 180px;
+    background-size: 280px 180px;
+  }
+
+  .quiz-container .wave-front {
+    bottom: 40px;
+    height: 50px;
+    background-size: 150px 50px;
+  }
+
+  .quiz-container .wave-back {
+    bottom: 60px;
+    height: 50px;
+    background-size: 300px 50px;
+  }
+
+  .questions {
+    padding: var(--space-sm) var(--space-md);
+  }
+
+  .option {
+    padding: 12px var(--space-md);
+    font-size: 0.9rem;
+  }
+}

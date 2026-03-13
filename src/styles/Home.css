@@ -1,0 +1,102 @@
+/* ============================================================
+   HOME.CSS — Home Page Layout
+   ============================================================ */
+
+/* ---- Bismillah Header ---- */
+header {
+  padding: var(--space-md);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.bismilah {
+  height: 90px;
+  width: 100%;
+  max-width: 300px;
+  object-fit: contain;
+  filter: drop-shadow(0 0 10px rgba(242, 184, 75, 0.15));
+}
+
+/* ---- Welcome Section ---- */
+.welcome-section {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  gap: var(--space-sm);
+  padding: var(--space-sm) var(--space-lg);
+}
+
+.welcome-section h2 {
+  font-weight: 700;
+  font-size: clamp(1.3rem, 3vw, 1.8rem);
+  color: var(--font-main);
+}
+
+.welcome-section img {
+  width: 28px;
+  height: 28px;
+}
+
+/* ---- Main Area: Calendar + Options Row ---- */
+.home-main {
+  padding: var(--space-md) var(--space-lg);
+  display: flex;
+  flex-direction: row;
+  gap: var(--space-lg);
+  align-items: stretch;
+}
+
+/* ---- Explore Title ---- */
+.explore-title {
+  padding: var(--space-md) var(--space-lg);
+  font-size: clamp(1.2rem, 3vw, 1.6rem);
+  font-weight: 700;
+  color: var(--font-main);
+}
+
+/* ---- Explore Section Container ---- */
+.explore-section {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+}
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+
+/* ---- Tablet ---- */
+@media (max-width: 900px) {
+  .home-main {
+    flex-direction: column;
+    padding: var(--space-md);
+    gap: var(--space-md);
+  }
+}
+
+/* ---- Mobile ---- */
+@media (max-width: 768px) {
+  header {
+    padding: var(--space-md) var(--space-sm);
+  }
+
+  .bismilah {
+    height: 70px;
+  }
+
+  .welcome-section {
+    padding: var(--space-sm) var(--space-md);
+  }
+
+  .home-main {
+    flex-direction: column;
+    padding: var(--space-sm) var(--space-md);
+    gap: var(--space-md);
+  }
+
+  .explore-title {
+    padding: var(--space-sm) var(--space-md);
+  }
+}

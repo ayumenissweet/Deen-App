@@ -1,0 +1,286 @@
+/* ============================================================
+   PRAYER PAGE.CSS — Prayer Times Page
+   Uses centralized vars from index.css
+   ============================================================ */
+
+/* ---- Container ---- */
+.container {
+  width: 100%;
+  margin: 0 auto;
+  padding: 0;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ---- Page Header (back + icons) ---- */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--space-lg) var(--space-lg) 0;
+}
+
+.icon {
+  width: 22px;
+  height: 22px;
+  cursor: pointer;
+  opacity: 0.8;
+  transition:
+    opacity var(--transition-fast),
+    transform var(--transition-fast);
+}
+
+.icon:hover {
+  opacity: 1;
+  transform: scale(1.1);
+}
+
+.icons {
+  display: flex;
+  gap: var(--space-md);
+}
+
+/* ---- Mosque Banner ---- */
+
+.skyline-container {
+  width: 100%;
+  height: 374px;
+  position: relative;
+  overflow: hidden;
+}
+
+.mosque-skyline {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 374px;
+
+  background-image: url("../images/Mosque.svg");
+  background-repeat: repeat-x;
+  background-size: 401px 374px;
+
+  z-index: 3;
+}
+
+.wave {
+  position: absolute;
+  width: 100%;
+  background-repeat: repeat-x;
+}
+
+.wave-front {
+  position: absolute;
+  bottom: 80px;
+  width: 100%;
+  height: 100px;
+
+  background-image: url("../images/wave1.svg");
+  background-repeat: repeat-x;
+  background-size: 200px 100px;
+
+  z-index: 2;
+}
+
+.wave-back {
+  position: absolute;
+  bottom: 120px;
+  width: 100%;
+  height: 100px;
+
+  background-image: url("../images/wave2.svg");
+  background-repeat: repeat-x;
+  background-size: 404px 100px;
+
+  z-index: 1;
+}
+
+/* ---- Timer Section ---- */
+.timer {
+  text-align: center;
+  padding: var(--space-xl) var(--space-lg) var(--space-lg);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.timer-blocks {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  gap: var(--space-xs);
+  width: 100%;
+}
+
+.time-block {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-xs);
+  min-width: 70px;
+}
+
+.time-value {
+  font-size: clamp(2rem, 6vw, 3.5rem);
+  font-weight: 800;
+  letter-spacing: 2px;
+  color: var(--font-main);
+  line-height: 1;
+}
+
+.time-label {
+  font-size: 11px;
+  color: var(--font-weak);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.colon {
+  font-size: clamp(1.8rem, 5vw, 3rem);
+  font-weight: 800;
+  color: var(--accent);
+  line-height: 1;
+  padding-top: 2px;
+  animation: blink 1s step-end infinite;
+}
+
+@keyframes blink {
+  0%,
+  100% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0.2;
+  }
+}
+
+/* ---- Prayer List ---- */
+.prayer-list {
+  padding: 0 var(--space-md) var(--space-lg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+  width: 100%;
+  max-width: 640px;
+  margin: 0 auto;
+  box-sizing: border-box;
+}
+
+.list-header {
+  display: flex;
+  justify-content: space-between;
+  padding: var(--space-xs) var(--space-xs) 2px;
+  font-size: 13px;
+  color: var(--font-weak);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+/* ---- Prayer Card ---- */
+.prayer-card {
+  background: var(--bg-surface);
+  padding: 14px var(--space-md);
+  border-radius: var(--radius-md);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+  border: 2px solid transparent;
+  transition: all var(--transition-base);
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.prayer-card:hover {
+  background: #123d5a;
+  transform: translateX(4px);
+}
+
+.prayer-card.active {
+  border-color: var(--accent);
+  background: rgba(242, 184, 75, 0.06);
+  box-shadow: 0 0 15px rgba(242, 184, 75, 0.1);
+}
+
+.prayer-card.passed {
+  opacity: 0.6;
+}
+
+.prayer-name {
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--font-main);
+}
+
+.prayer-card.active .prayer-name {
+  font-weight: 700;
+  color: var(--accent);
+}
+
+.prayer-right {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+}
+
+.prayer-time {
+  font-size: 15px;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.85);
+  min-width: 40px;
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+.prayer-card.active .prayer-time {
+  color: var(--accent);
+  font-weight: 700;
+}
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+
+/* Tablet */
+@media (min-width: 600px) {
+  .timer {
+    max-width: 560px;
+    margin: 0 auto;
+  }
+
+  .time-block {
+    min-width: 90px;
+  }
+
+  .prayer-card {
+    padding: 16px var(--space-lg);
+  }
+}
+
+/* Desktop */
+@media (min-width: 1024px) {
+  .timer {
+    max-width: 640px;
+  }
+
+  .time-block {
+    min-width: 120px;
+  }
+
+  .prayer-card {
+    padding: 18px var(--space-lg);
+    border-radius: var(--radius-lg);
+  }
+
+  .prayer-card:hover {
+    background: #0f3f60;
+  }
+}
+
+/* Mobile */
+@media (max-width: 480px) {
+  .header {
+    padding: var(--space-md) var(--space-md) 0;
+  }
+}

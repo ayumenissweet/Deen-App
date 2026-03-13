@@ -1,0 +1,143 @@
+/* ============================================================
+   EXPLORE.CSS — Horizontal Carousel of Feature Cards
+   ============================================================ */
+
+.explore {
+  padding: var(--space-md) var(--space-lg);
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+}
+
+/* ---- Arrow Buttons ---- */
+.flech-gauche,
+.flech-droite {
+  cursor: pointer;
+  width: 36px;
+  height: 36px;
+  flex-shrink: 0;
+  background-size: 14px;
+  background-position: center;
+  background-repeat: no-repeat;
+  border: 1px solid var(--card-stroke);
+  background-color: rgba(255, 255, 255, 0.03);
+  border-radius: var(--radius-full);
+  z-index: 2;
+  transition: all var(--transition-fast);
+}
+
+.flech-gauche:hover,
+.flech-droite:hover {
+  background-color: rgba(242, 184, 75, 0.1);
+  border-color: var(--accent);
+}
+
+.flech-gauche {
+  background-image: url("../assets/flech-gauche.svg");
+}
+
+.flech-droite {
+  background-image: url("../assets/flech-droite.svg");
+}
+
+/* ---- Carousel Track ---- */
+.explore-carousel {
+  display: flex;
+  gap: var(--space-md);
+  padding: var(--space-sm);
+  overflow-x: auto;
+  overflow-y: hidden;
+  scroll-behavior: smooth;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+
+  /* Take remaining space instead of fixed calc */
+  flex: 1;
+  min-width: 0;
+}
+
+.explore-carousel::-webkit-scrollbar {
+  display: none;
+}
+
+/* ---- Feature Card ---- */
+.explore-card {
+  min-width: 180px;
+  max-width: 220px;
+  height: 170px;
+  background: linear-gradient(135deg, var(--bg-card-end), var(--bg-card-start));
+  border: 0.82px solid var(--card-stroke);
+  border-radius: var(--radius-md);
+  padding: var(--space-md);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  flex-shrink: 0;
+  transition: all var(--transition-base);
+  cursor: pointer;
+}
+
+.explore-card:hover {
+  transform: translateY(-4px);
+  border-color: var(--accent);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+}
+
+.explore-card h3 {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--font-main);
+  margin-bottom: var(--space-xs);
+}
+
+.explore-card p {
+  font-size: 0.8rem;
+  color: var(--font-weak);
+  line-height: 1.4;
+}
+
+/* ---- Emoji Icon ---- */
+.explore-icon {
+  font-size: 32px;
+  margin-bottom: var(--space-sm);
+}
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+@media (max-width: 768px) {
+  .explore {
+    padding: var(--space-sm) var(--space-md);
+    gap: var(--space-sm);
+  }
+
+  /* Hide arrows on mobile — touch scrolling is natural */
+  .flech-gauche,
+  .flech-droite {
+    display: none;
+  }
+
+  .explore-card {
+    min-width: 150px;
+    height: 155px;
+    padding: var(--space-sm);
+  }
+}
+
+@media (max-width: 480px) {
+  .explore-card {
+    min-width: 140px;
+    height: 145px;
+  }
+
+  .explore-icon {
+    font-size: 28px;
+  }
+
+  .explore-card h3 {
+    font-size: 0.85rem;
+  }
+}

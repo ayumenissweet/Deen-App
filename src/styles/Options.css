@@ -1,0 +1,82 @@
+/* ============================================================
+   OPTIONS.CSS — Home page quick-access icon grid
+   Renamed from .options → .home-options to avoid class conflict
+   ============================================================ */
+
+.home-options {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+  gap: var(--space-md);
+  flex: 1;
+  min-width: 240px;
+  padding: var(--space-sm);
+}
+
+.home-option {
+  background: linear-gradient(135deg, var(--bg-card-end), var(--bg-card-start));
+  border: 0.82px solid var(--card-stroke);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-sm);
+  padding: var(--space-md);
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: all var(--transition-base);
+  text-align: center;
+}
+
+.home-option:hover {
+  transform: translateY(-3px);
+  border-color: var(--accent);
+  box-shadow: 0 4px 15px rgba(242, 184, 75, 0.15);
+}
+
+.home-option p {
+  font-size: clamp(0.75rem, 1.5vw, 0.9rem);
+  font-weight: 500;
+  color: var(--font-main);
+  margin: 0;
+}
+
+.home-option-img {
+  width: 48px;
+  height: 48px;
+  object-fit: contain;
+  transition: transform var(--transition-base);
+}
+
+.home-option:hover .home-option-img {
+  transform: scale(1.1);
+}
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+@media (max-width: 900px) {
+  .home-options {
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: 1fr;
+    flex: none;
+    width: 100%;
+    min-width: auto;
+  }
+}
+
+@media (max-width: 480px) {
+  .home-options {
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-sm);
+  }
+
+  .home-option {
+    padding: var(--space-sm);
+  }
+
+  .home-option-img {
+    width: 40px;
+    height: 40px;
+  }
+}

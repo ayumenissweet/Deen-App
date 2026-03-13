@@ -1,68 +1,238 @@
+/* ============================================================
+   INDEX.CSS — Centralized Design System for Deen-App
+   ============================================================
+   All shared variables, resets, typography, and layout go here.
+   Individual page CSS files should NOT re-declare these.
+   ============================================================ */
+
+/* --- Google Fonts --- */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Amiri:wght@400;700&display=swap');
+
+/* ---- Design Tokens (CSS Custom Properties) ---- */
 :root {
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
+  /* Background & Surfaces */
+  --bg-main:        #041C32;
+  --bg-card-start:  #00172D;
+  --bg-card-end:    #2A4794;
+  --bg-darker:      #000F1F;
+  --bg-surface:     #0b2c44;
 
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+  /* Strokes & Borders */
+  --card-stroke:    rgba(5, 104, 149, 0.6);
 
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
+  /* Accent & Brand */
+  --accent:         #F2B84B;          /* Gold */
+  --accent-hover:   #f6c90e;
+  --success:        #4CAF50;          /* Green */
+  --danger:         #ef4444;          /* Red for errors */
+  --purple-badge:   #A29BFE;
+
+  /* Typography Colors */
+  --font-main:      #F1F6FF;
+  --font-secondary: #A8CFFF;
+  --font-weak:      #8492A3;
+
+  /* Icons */
+  --icons:          #8492A3;
+
+  /* Progress */
+  --progress-bar-bg: #4C6080;
+
+  /* Spacing scale (used for consistency) */
+  --space-xs:  4px;
+  --space-sm:  8px;
+  --space-md:  16px;
+  --space-lg:  24px;
+  --space-xl:  32px;
+  --space-2xl: 48px;
+
+  /* Border radius */
+  --radius-sm:  8px;
+  --radius-md:  12px;
+  --radius-lg:  16px;
+  --radius-xl:  20px;
+  --radius-full: 50%;
+
+  /* Shadows */
+  --shadow-card:  0 4px 20px rgba(2, 12, 21, 0.6);
+  --shadow-glow:  0 0 15px rgba(242, 184, 75, 0.2);
+
+  /* Transitions */
+  --transition-fast: 0.2s ease;
+  --transition-base: 0.3s ease;
+  --transition-slow: 0.5s ease;
+
+  /* Navbar dimension */
+  --navbar-width: 80px;
+  --navbar-height-mobile: 70px;
+}
+
+/* ---- Global Reset ---- */
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* ---- Typography ---- */
+html {
+  font-size: 16px;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-}
-
-a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
-}
-a:hover {
-  color: #535bf2;
+  text-rendering: optimizeLegibility;
 }
 
 body {
-  margin: 0;
-  display: flex;
-  place-items: center;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+  color: var(--font-main);
+  background-color: var(--bg-main);
+  min-height: 100vh;
   min-width: 320px;
+  overflow-x: hidden;
+}
+
+/* Arabic text uses Amiri */
+[dir="rtl"],
+.arabic-text {
+  font-family: 'Amiri', serif;
+}
+
+/* ---- Root mount ---- */
+#root {
+  width: 100%;
   min-height: 100vh;
 }
 
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
+/* ---- Links ---- */
+a {
+  color: var(--accent);
+  text-decoration: none;
+  transition: color var(--transition-fast);
+}
+a:hover {
+  color: var(--accent-hover);
 }
 
+/* ---- Buttons (global reset) ---- */
 button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
   font-family: inherit;
-  background-color: #1a1a1a;
   cursor: pointer;
-  transition: border-color 0.25s;
-}
-button:hover {
-  border-color: #646cff;
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
+  border: none;
+  outline: none;
+  background: none;
+  color: inherit;
+  transition: all var(--transition-base);
 }
 
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
+/* ---- Headings ---- */
+h1 { font-size: clamp(1.5rem, 4vw, 2.2rem); font-weight: 700; }
+h2 { font-size: clamp(1.2rem, 3vw, 1.8rem); font-weight: 700; }
+h3 { font-size: clamp(1rem, 2.5vw, 1.4rem); font-weight: 600; }
+
+/* ---- Layout: App Container ---- */
+.app-container {
+  display: flex;
+  min-height: 100vh;
+  width: 100%;
+  position: relative;
+}
+
+/* ---- Layout: Page Content ---- */
+.page-content {
+  flex: 1;
+  padding: var(--space-lg);
+  background-color: var(--bg-main);
+  color: var(--font-main);
+  min-height: 100vh;
+  overflow-y: auto;
+  overflow-x: hidden;
+
+  /* Desktop: offset by sidebar width */
+  margin-left: var(--navbar-width);
+}
+
+/* ---- Shared Card Styling ---- */
+.card {
+  background: linear-gradient(117deg, var(--bg-card-end), var(--bg-card-start));
+  border: 0.82px solid var(--card-stroke);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-card);
+  padding: var(--space-md) var(--space-lg);
+}
+
+/* ---- Shared: Header icons row (Notif + Settings) ---- */
+.header-icons {
+  display: flex;
+  justify-content: flex-end;
+  gap: var(--space-sm);
+  position: fixed;
+  top: var(--space-md);
+  right: var(--space-md);
+  width: auto;
+  height: auto;
+  z-index: 999;
+}
+.header-icons img {
+  width: 28px;
+  height: 28px;
+  opacity: 0.8;
+  cursor: pointer;
+  transition: opacity var(--transition-fast);
+}
+.header-icons img:hover {
+  opacity: 1;
+}
+
+/* ---- Scrollbar styling ---- */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: var(--bg-darker);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--card-stroke);
+  border-radius: 3px;
+}
+
+/* ---- Page Title ---- */
+.page-title {
+  font-size: clamp(1.5rem, 3vw, 2.2rem);
+  font-weight: 700;
+  color: var(--font-main);
+}
+
+/* ============================================================
+   RESPONSIVE BREAKPOINTS
+   ============================================================ */
+
+/* ---- Tablet (≤ 768px) ---- */
+@media (max-width: 768px) {
+  .page-content {
+    margin-left: 0;
+    padding: var(--space-md);
+    padding-bottom: calc(var(--navbar-height-mobile) + var(--space-lg));
   }
-  a:hover {
-    color: #747bff;
+
+  .header-icons {
+    position: relative;
+    top: auto;
+    right: auto;
+    padding: var(--space-sm) 0;
   }
-  button {
-    background-color: #f9f9f9;
+}
+
+/* ---- Small mobile (≤ 480px) ---- */
+@media (max-width: 480px) {
+  .page-content {
+    padding: var(--space-sm) var(--space-md);
+    padding-bottom: calc(var(--navbar-height-mobile) + var(--space-md));
   }
+
+  h1 { font-size: 1.5rem; }
+  h2 { font-size: 1.2rem; }
 }

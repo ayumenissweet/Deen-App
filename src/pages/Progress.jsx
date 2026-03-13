@@ -1,12 +1,17 @@
 import React, { useState } from "react";
-import "./App.css";
+import { useNavigate } from "react-router-dom";
 
-import NotifIcon from "./assets/images/Notif.svg";
-import SettingsIcon from "./assets/images/Settings.svg";
-import MoonIcon from "./assets/images/Moon.svg";
-import QuranIcon from "./assets/images/Quran.svg";
+// Styles
+import "../styles/Progress.css";
 
-function App() {
+// Assets
+import NotifIcon from "../assets/Notif.svg";
+import SettingsIcon from "../assets/Settings.svg";
+import MoonIcon from "../assets/Moon.svg";
+import QuranIcon from "../assets/Quran.svg";
+
+function Progress({ onOpenNotif }) {
+  const navigate = useNavigate();
   // 1. SHARED STATE: One list to track all 5 prayers
   // [Fajr, Dhuhr, Asr, Maghrib, Isha]
   const [prayers, setPrayers] = useState([false, false, false, false, false]);
@@ -25,13 +30,13 @@ function App() {
   };
 
   return (
-    <div className="app-container">
-      <div className="options">
-        <img src={NotifIcon} alt="Notifications" />
-        <img src={SettingsIcon} alt="Settings" />
-      </div>
-
+    <div className="progress-page">
       <main>
+        <div className="progress-icons">
+          <img src={NotifIcon} alt="Notifications" onClick={onOpenNotif} style={{ cursor: 'pointer' }} />
+          <img src={SettingsIcon} alt="Settings" onClick={() => navigate('/settings')} style={{ cursor: 'pointer' }} />
+        </div>
+
         <h1 className="page-title">Omar</h1>
 
         <div className="progress-container">
@@ -39,12 +44,12 @@ function App() {
             <h2>
               {completedCount === 5
                 ? "All Done! Alhamdulillah"
-                : "Daily Progress"}
+                : "You Are Up To Date!"}
             </h2>
+
             <div className="progress-info">
               <div className="ring">
                 <svg viewBox="0 0 120 120">
-                  {/* We map through our 5 prayers to create the 5 segments */}
                   {prayers.map((isDone, index) => (
                     <circle
                       key={index}
@@ -55,18 +60,21 @@ function App() {
                     />
                   ))}
                 </svg>
+
                 <p className="progress-score">{percentage}%</p>
               </div>
+
               <div className="progress-comment">
                 <div className="prayer-done-icon">
                   <p>
-                    <span className="prayer-done">{completedCount}</span>{" "}
-                    Prayers Done
+                    <span className="prayer-done">{completedCount}</span> Prayer
+                    Done
                   </p>
                   <img src={MoonIcon} alt="Moon" />
                 </div>
+
                 <p className="prayer-left">
-                  <span>{5 - completedCount}</span> Prayers Left
+                  <span>{5 - completedCount}</span> Prayer Left
                 </p>
               </div>
             </div>
@@ -77,6 +85,7 @@ function App() {
 
         <div className="card">
           <div className="name-icon">
+            {/* Prayer icons stay EXACTLY the same */}
             {/* FAJR */}
             <PrayerIcon
               name="Fajr"
@@ -200,4 +209,4 @@ const PrayerIcon = ({ name, isDone, onClick, children }) => {
   );
 };
 
-export default App;
+export default Progress;

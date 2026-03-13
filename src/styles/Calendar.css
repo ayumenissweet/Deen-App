@@ -1,0 +1,169 @@
+/* ============================================================
+   CALENDAR.CSS — Hijri Calendar Component
+   Responsive: full-width on mobile, constrained on desktop
+   ============================================================ */
+
+.calendar {
+  padding: var(--space-lg);
+  width: 100%;
+  max-width: 420px;
+  flex: 1;
+  min-width: 280px;
+  background: linear-gradient(135deg, var(--bg-card-end), var(--bg-card-start));
+  border: 0.82px solid var(--card-stroke);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-card);
+  transition: transform var(--transition-base);
+}
+
+.calendar:hover {
+  transform: translateY(-2px);
+}
+
+/* ---- Month Navigation Header ---- */
+.calendar-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--space-md);
+}
+
+.calendar-header h2 {
+  margin: 0;
+  font-size: clamp(1rem, 2.5vw, 1.25rem);
+  flex: 1;
+  text-align: center;
+  color: var(--font-main);
+  font-weight: 600;
+}
+
+/* Month arrows */
+.calendar-btn1,
+.calendar-btn2 {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 14px;
+  border-radius: var(--radius-sm);
+  transition: background var(--transition-fast);
+  flex-shrink: 0;
+}
+
+.calendar-btn1 {
+  background-image: url("../assets/flicha1.svg");
+  background-size: 12px;
+  background-repeat: no-repeat;
+  background-position: center;
+  width: 36px;
+  height: 36px;
+}
+
+.calendar-btn2 {
+  background-image: url("../assets/flicha2.svg");
+  background-size: 12px;
+  background-repeat: no-repeat;
+  background-position: center;
+  width: 36px;
+  height: 36px;
+}
+
+.calendar-btn1:hover,
+.calendar-btn2:hover {
+  background-color: rgba(255, 255, 255, 0.08);
+}
+
+/* ---- Weekday Headers ---- */
+.calendar-weekdays {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 2px;
+  margin-bottom: var(--space-sm);
+}
+
+.weekday {
+  font-weight: 600;
+  text-align: center;
+  padding: var(--space-xs);
+  font-size: 11px;
+  color: var(--font-weak);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+/* ---- Day Grid ---- */
+.calendar-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 3px;
+}
+
+.calendar-day {
+  aspect-ratio: 1;
+  border-radius: var(--radius-sm);
+  text-align: center;
+  color: var(--font-main);
+  transition: all var(--transition-fast);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: clamp(12px, 1.5vw, 14px);
+  font-weight: 600;
+}
+
+.calendar-day:hover {
+  background: rgba(255, 255, 255, 0.08);
+  transform: scale(1.05);
+}
+
+/* Today highlight */
+.calendar-day.today {
+  background: var(--accent);
+  color: var(--bg-main);
+  font-weight: 700;
+  border: none;
+  box-shadow: 0 0 12px rgba(242, 184, 75, 0.4);
+  border-radius: var(--radius-full);
+}
+
+.calendar-day.today:hover {
+  transform: scale(1.1);
+}
+
+/* Empty cells */
+.calendar-day.empty {
+  background: transparent;
+  border: none;
+  cursor: default;
+}
+.calendar-day.empty:hover {
+  transform: none;
+  background: transparent;
+}
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+@media (max-width: 900px) {
+  .calendar {
+    max-width: 100%;
+    flex: none;
+    width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .calendar {
+    padding: var(--space-md);
+    border-radius: var(--radius-lg);
+  }
+
+  .calendar-day {
+    font-size: 12px;
+  }
+
+  .weekday {
+    font-size: 10px;
+    padding: 2px;
+  }
+}

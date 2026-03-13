@@ -1,0 +1,238 @@
+/* ============================================================
+   PROGRESS.CSS — Prayer Progress Tracking Page
+   Uses centralized vars from index.css — no re-declarations!
+   ============================================================ */
+
+/* ---- Notification icons (top-right) ---- */
+.progress-icons {
+  display: flex;
+  justify-content: flex-end;
+  gap: var(--space-sm);
+  padding: var(--space-sm) 0;
+}
+
+.progress-icons img {
+  width: 28px;
+  opacity: 0.8;
+  cursor: pointer;
+  transition: opacity var(--transition-fast);
+}
+
+.progress-icons img:hover {
+  opacity: 1;
+}
+
+/* ---- Main Content (scoped to progress page) ---- */
+.progress-page main {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+  padding: var(--space-md) 0;
+  width: 100%;
+}
+
+/* ---- Cards: force full width (scoped to progress page) ---- */
+.progress-page .card {
+  width: 100%;
+  padding: var(--space-lg) var(--space-xl);
+}
+
+/* ---- Progress Ring Card ---- */
+.progress-container {
+  width: 100%;
+}
+
+.ring {
+  width: 160px;
+  height: 160px;
+  display: grid;
+  place-items: center;
+  position: relative;
+  flex-shrink: 0;
+}
+
+.ring svg {
+  grid-area: 1 / 1;
+  width: 100%;
+  height: 100%;
+}
+
+.progress-score {
+  grid-area: 1 / 1;
+  margin: 0;
+  color: var(--accent);
+  font-size: 1.5rem;
+  font-weight: 700;
+  z-index: 2;
+  text-align: center;
+  transition: all var(--transition-base);
+}
+
+/* ---- SVG Segments (prayer ring) ---- */
+.seg {
+  fill: none;
+  stroke: #44596d;
+  stroke-width: 12;
+  stroke-linecap: round;
+  stroke-dasharray: 35 248;
+  transform-origin: 50% 50%;
+  transition:
+    stroke 0.4s ease,
+    filter 0.4s ease,
+    stroke-dasharray 0.4s ease;
+}
+
+.seg:nth-child(1) { transform: rotate(-90deg); }
+.seg:nth-child(2) { transform: rotate(-18deg); }
+.seg:nth-child(3) { transform: rotate(54deg); }
+.seg:nth-child(4) { transform: rotate(126deg); }
+.seg:nth-child(5) { transform: rotate(198deg); }
+
+.seg.active {
+  stroke: var(--success);
+  filter: drop-shadow(0 0 8px var(--success));
+  stroke-dasharray: 45 248;
+}
+
+/* ---- Progress Info (ring + text side by side) ---- */
+.progress-info {
+  display: flex;
+  align-items: center;
+  gap: var(--space-xl);
+  padding: var(--space-md) 0;
+}
+
+.progress-comment {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+  font-size: clamp(0.9rem, 2vw, 1.3rem);
+}
+
+.prayer-done-icon {
+  color: var(--accent);
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  font-weight: 600;
+}
+
+.prayer-done-icon img {
+  width: 22px;
+}
+
+.prayer-left {
+  color: var(--font-weak);
+}
+
+.prayer-done {
+  font-size: 1.3em;
+  font-weight: 800;
+}
+
+/* ---- Prayer Icons Row (Daily Goals) ---- */
+.name-icon {
+  display: flex;
+  justify-content: space-around;
+  gap: var(--space-md);
+  flex-wrap: nowrap;
+  padding: var(--space-md) var(--space-sm);
+}
+
+.name-element {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-sm);
+  cursor: pointer;
+  flex: 1;
+  transition: transform var(--transition-fast);
+  padding: var(--space-sm);
+  border-radius: var(--radius-md);
+}
+
+.name-element:hover {
+  transform: translateY(-3px);
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.name-element p {
+  font-size: 0.85rem;
+  font-weight: 500;
+  margin: 0;
+}
+
+.prayer-icon {
+  width: 36px;
+  height: 36px;
+}
+
+/* ---- Quran Progress Card ---- */
+.quran-progress {
+  display: flex;
+  flex-direction: column;
+}
+
+.quran-progress h2 {
+  font-size: clamp(1rem, 2.5vw, 1.5rem);
+}
+
+.quran-progress h2 span {
+  color: var(--accent);
+  font-weight: 800;
+}
+
+.quran-progress img {
+  width: 60px;
+  align-self: flex-end;
+  margin-top: var(--space-sm);
+}
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+@media (max-width: 768px) {
+  .progress-icons {
+    justify-content: flex-end;
+  }
+
+  .app-container .card {
+    padding: var(--space-md) var(--space-lg);
+  }
+}
+
+@media (max-width: 480px) {
+  .progress-info {
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-lg);
+  }
+
+  .ring {
+    width: 140px;
+    height: 140px;
+  }
+
+  .progress-comment {
+    text-align: center;
+    align-items: center;
+  }
+
+  .name-icon {
+    gap: var(--space-sm);
+    padding: var(--space-sm) 0;
+  }
+
+  .name-element p {
+    font-size: 0.75rem;
+  }
+
+  .prayer-icon {
+    width: 28px;
+    height: 28px;
+  }
+
+  .app-container .card {
+    padding: var(--space-md);
+  }
+}
